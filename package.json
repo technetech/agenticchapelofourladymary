@@ -1,0 +1,1 @@
+{"name":"capilla-agentica","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"node server.mjs","test":"node --test tests/*.test.mjs","check":"node --check api/chapel.js && node --check public/app.js"},"dependencies":{"@vercel/blob":"^2.7.0"},"engines":{"node":">=22"}}

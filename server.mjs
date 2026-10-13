@@ -1,0 +1,10 @@
+import http from 'node:http';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {randomBytes} from 'node:crypto';
+process.env.LOCAL_PREVIEW='1';
+process.env.SESSION_SECRET ||= randomBytes(32).toString('hex');
+const {default:handler}=await import('./api/chapel.js');
+const types={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.txt':'text/plain'};
+const server=http.createServer(async(req,res)=>{const url=new URL(req.url,'http://localhost');if(url.pathname.startsWith('/api/')||['/llms.txt','/openapi.json','/sitemap.xml'].includes(url.pathname)){if(url.pathname==='/llms.txt')req.url='/api/guide';if(url.pathname==='/openapi.json')req.url='/api/openapi';if(url.pathname==='/sitemap.xml')req.url='/api/sitemap';return handler(req,res);}const file=path.resolve('public',url.pathname==='/'?'index.html':`.${url.pathname}`);if(!file.startsWith(path.resolve('public')+path.sep)){res.statusCode=403;return res.end();}try{res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(await readFile(file));}catch{res.statusCode=404;res.end('No encontrado');}});
+server.listen(3000,'127.0.0.1',()=>console.log('Local: http://127.0.0.1:3000'));
