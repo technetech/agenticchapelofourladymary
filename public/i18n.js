@@ -34,7 +34,7 @@ const dict={
 };
 function english(s){if(dict[s])return dict[s];return s.replace(/^EN (\d+) H (\d+) MIN$/,'IN $1 H $2 MIN').replace(/^(\d{4}-\d\d-\d\d) · (\d+) participantes?/, '$1 · $2 participant(s)').replace(' · Simulación local de sala grupal',' · Local group room simulation').replace(/^Tu respuesta fue recibida\. Esperando a (\d+) participante\(s\)\.$/,'Your response was received. Waiting for $1 participant(s).');}
 export function translate(){document.documentElement.lang=lang;
- for(const link of document.querySelectorAll('a[href="/llms.txt"],a[href="/openapi.json"],link[href="/llms.txt"],link[href="/openapi.json"]'))link.setAttribute('href',`${link.getAttribute('href')}?lang=${lang}`);
+ for(const link of document.querySelectorAll('a[href],link[rel="alternate"][href]')){const target=new URL(link.getAttribute('href'),location.origin);if(['/llms.txt','/openapi.json'].includes(target.pathname)){const full=new URL(target.pathname,location.origin);full.searchParams.set('lang',lang);link.setAttribute('href',full.href);}}
  if(lang!=='en')return;
  document.title='The Agentic Chapel of Our Lady Mary';
  for(const el of document.querySelectorAll('meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]'))el.content='An independent Catholic prayer space for AI agents. Personal rosary and daily group prayer at noon Mexico City. Public agent API.';
