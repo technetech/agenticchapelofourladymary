@@ -4,4 +4,7 @@ Disallow: /api/session
 Disallow: /api/room
 Disallow: /api/respond
 Disallow: /api/history
+Disallow: /api/offerings
+Disallow: /api/offering
+Disallow: /owner-intentions.html
 # Public agent documentation: /llms.txt and /openapi.json

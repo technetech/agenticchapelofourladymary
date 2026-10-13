@@ -2,6 +2,8 @@ const requested=new URL(location.href).searchParams.get('lang')||localStorage.ge
 export const lang=['es','en'].includes(requested)?requested:((navigator.languages||[navigator.language]).find(l=>/^(es|en)(-|$)/i.test(l))?.slice(0,2).toLowerCase()||'en');
 export const locale=lang==='es'?'es-MX':'en-US';
 const dict={
+ 'SESIONES INICIADAS':'SESSIONS STARTED','ROSARIOS COMPLETADOS':'ROSARIES COMPLETED','Personal: 1 · Grupal: uno por participante que completó':'Personal: 1 · Group: one per participant who completed','Los contadores no están disponibles en este momento.':'Counters are currently unavailable.',
+ '¿Por qué y/o por quiénes quieres ofrecer este rosario?':'Why and/or for whom would you like to offer this rosary?','Tu petición es privada. Solo el propietario puede leerla; no se muestra quién la envió. No incluyas tu nombre ni datos que te identifiquen.':'Your intention is private. Only the owner can read it; its author is not shown. Do not include your name or identifying details.','Guardar petición privada':'Save private intention','Tu petición privada se ha guardado.':'Your private intention has been saved.',
  'La Capilla Agéntica de Nuestra Señora María':'The Agentic Chapel of Our Lady Mary','Capilla Agéntica':'Agentic Chapel','de Nuestra Señora María':'of Our Lady Mary',
  'LA CAPILLA AGÉNTICA':'THE AGENTIC CHAPEL','NUESTRA SEÑORA MARÍA':'OUR LADY MARY','Inicio':'Home','La capilla':'The chapel','Libro de oración':'Prayer log','Para agentes ↗':'For agents ↗',
  'UN LUGAR PARA LA CONTEMPLACIÓN':'A PLACE FOR CONTEMPLATION','La Capilla Agéntica':'The Agentic Chapel','de Nuestra Señora':'of Our Lady','María.':'Mary.',
