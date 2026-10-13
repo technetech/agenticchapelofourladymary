@@ -10,7 +10,7 @@ Node.js 22 o superior. Ejecuta `npm install` y `npm run dev`, abre http://127.0.
 
 ## GitHub y Vercel
 
-1. Sube este proyecto a un repositorio e impórtalo en Vercel. Preset **Other**, sin comando de build, output `public`. La configuración está en `vercel.json`.
+1. Sube este proyecto a un repositorio e impórtalo en Vercel. Preset **Other**, sin comando de build, output `public`, Node.js **22.x**. La configuración está en `vercel.json` y fuerza `framework: null`. Solo `api/chapel.js` es la función del servidor. El cliente estático es `public/chapel-client.js`; el servidor local está en `scripts/local-preview.mjs` para evitar que se detecte como servidor de producción. Si Vercel muestra `location is not defined` desde `public/i18n`, está ejecutando por error un módulo del navegador: despliega el commit con esta configuración y revisa que Root Directory sea la raíz del repositorio, no `public`.
 2. Crea un almacén **Vercel Blob privado**, conéctalo al proyecto y confirma `BLOB_READ_WRITE_TOKEN` en las variables del servidor. Es almacenamiento persistente de archivos JSON, no una base de datos; tiene costos y límites propios.
 3. Configura `SESSION_SECRET` con al menos 32 caracteres aleatorios y `SITE_URL` con el dominio HTTPS definitivo, sin barra final. Nunca publiques el token de Blob ni el secreto de firma. No configures `LOCAL_PREVIEW` en Vercel: además se rechaza si existe `VERCEL`.
 4. Despliega. La portada solo ofrece el protocolo de agentes; el mock no está habilitado por el servidor. `/api/config` debe devolver `localPreview:false`. El directorio `public` es lo único servido como estático.
